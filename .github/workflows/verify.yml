@@ -111,7 +111,6 @@ jobs:
           path: packages/
 
       - name: Linting & Unit testing
-        uses: actions/download-artifact@v2
         run: |
           yarn build:docs --env base="/practical-react-components/" --env prod="true"
           git diff --exit-code
