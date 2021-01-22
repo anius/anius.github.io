@@ -112,7 +112,7 @@ jobs:
 
       - name: Linting & Unit testing
         run: |
-          yarn build:docs --env base="/practical-react-components/" --env prod="true"
+          yarn build:docs --env base="/" --env prod="true"
           git diff --exit-code
           tar zcvf docs-static.tgz -C packages/docs dist
       - name: Archive docs archive
