@@ -111,16 +111,26 @@ jobs:
           path: packages/
 
       - name: Linting & Unit testing
+        uses: actions/download-artifact@v2
         run: |
           yarn build:docs --env base="/practical-react-components/" --env prod="true"
           git diff --exit-code
           tar zcvf docs-static.tgz -C packages/docs dist
+      - name: Archive docs archive
+        uses: actions/upload-artifact@v2
+        with:
+          name: docs-static
+          path: docs-static.tgz
 
   deploy-docs:
     needs: docs
     runs-on: ubuntu-20.04
     steps:
 
+      - name: Download docs archive
+        uses: actions/download-artifact@v2
+        with:
+          name: docs-static
       - name: Extract docs 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
         if: ${{ github.event_name != 'pull_request' }}
         run: |
