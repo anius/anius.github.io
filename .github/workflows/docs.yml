@@ -5,10 +5,10 @@ on:
   push:
     branches:
       - main
-      - docs
 
 jobs:
-  build-and-deploy:
+  deploy-docs:
+    needs: docs
     runs-on: ubuntu-latest
     steps:
 
